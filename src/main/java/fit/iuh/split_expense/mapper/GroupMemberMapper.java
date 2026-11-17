@@ -16,7 +16,5 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GroupMemberMapper {
-    public GroupMember toEntity(CreateGroupRequest request){
 
-    }
 }

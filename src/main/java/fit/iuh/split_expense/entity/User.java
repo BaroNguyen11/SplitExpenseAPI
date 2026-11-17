@@ -5,13 +5,11 @@
 package fit.iuh.split_expense.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Random;
 
 /*
  *@description: this is a class to test the User class
@@ -25,10 +23,13 @@ import java.util.List;
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, unique = true, length = 8)
+    private String userCode;
     private String username;
     private String fullName;
     private String password;
@@ -41,5 +42,10 @@ public class User {
     protected void onCreated(){
         createdAt = Instant.now();
 
+    }
+    private String generateRandom8DigitCode() {
+        Random random = new Random();
+        int number = 10000000 + random.nextInt(90000000);
+        return String.valueOf(number);
     }
 }
